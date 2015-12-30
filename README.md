@@ -19,7 +19,7 @@ Copy the ```.env_schema```file to ```.env```and fill it.
 
 ### Run
 
-> ruby app.rb ping http://google.com --expected-status-code 200  --follow-location false
+> bin/ping-my-site ping http://google.com --expected-status-code 200  --follow-location false
 
 ### Options
 
@@ -30,11 +30,11 @@ Copy the ```.env_schema```file to ```.env```and fill it.
 
 ### Test HTTP status
 
-> ruby app.rb ping http://google.com --expected-status-code 200
+> bin/ping-my-site ping http://google.com --expected-status-code 200
 
 ### Test HTTP redirection
 
-> ruby app.rb ping http://mysite.be --expected-status-code 301 --follow-location false --expected-redirect-url http://www.mysite.be
+> bin/ping-my-site ping http://mysite.be --expected-status-code 301 --follow-location false --expected-redirect-url http://www.mysite.be
 
 ## Troubleshooting
 

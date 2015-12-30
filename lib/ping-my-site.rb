@@ -3,7 +3,7 @@ require "thor"
 require "curb"
 require "slack-notifier"
 
-Dotenv.load
+#Dotenv.load
 
 class PingMySite < Thor
   option :follow_location, type: :boolean, default: false, desc: "Allow CURL to follow HTTP redirection"
@@ -68,4 +68,4 @@ class PingMySite < Thor
   end
 end
 
-PingMySite.start(ARGV)
+#PingMySite.start(ARGV)
