@@ -16,8 +16,7 @@ Set up a new Incoming WebHook
 
 ### Run
 
-``` ruby app.rb http://www.google.com```
-
+```ruby app.rb ping http://google.com``` --expected-status-code 200  --follow-location false```
 
 ## Technologies
 
