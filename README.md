@@ -24,7 +24,17 @@ Copy the ```.env_schema```file to ```.env```and fill it.
 ### Options
 
 * ```--expected-status-code XXX``` : define the expected HTTP status code (default: ```200```)
-* ```--follow-location```: allow CURL to follow HTTP redirection (default: false)
+* ```--follow-location true```: allow CURL to follow HTTP redirection (default: false)
+
+## Usecase
+
+### Test HTTP status
+
+> ruby app.rb ping http://google.com --expected-status-code 200
+
+### Test HTTP redirection
+
+> ruby app.rb ping http://mysite.be --expected-status-code 301 --follow-location false --expected-redirect-url http://www.mysite.be
 
 ## Troubleshooting
 
