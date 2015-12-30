@@ -6,8 +6,8 @@ require "slack-notifier"
 Dotenv.load
 
 class PingMySite < Thor
-  option :follow_location, type: :boolean
-  option :expected_status_code, type: :numeric, required: true
+  option :follow_location, type: :boolean, default: false
+  option :expected_status_code, type: :numeric, default: 200
 
   desc "ping URL", "ping to URL"
   def ping(url)
