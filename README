@@ -1,0 +1,31 @@
+# Ping My Site
+
+A simple CLI Pingdom-like written in ruby
+
+## How to use
+
+### Git clone
+
+### Install required Gem
+
+```bundle```
+
+### dotenv (.env)
+
+Set up a new Incoming WebHook
+
+### Run
+
+``` ruby app.rb http://www.google.com```
+
+
+## Technologies
+
+* Dotenv
+* Thor
+* Curb
+* Slack-Notifier
+
+## Note
+
+Proudly coded with VIM
