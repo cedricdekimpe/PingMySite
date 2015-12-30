@@ -3,7 +3,7 @@ require "thor"
 require "curb"
 require "slack-notifier"
 
-#Dotenv.load
+$TESTING = false
 
 class PingMySite < Thor
   option :follow_location, type: :boolean, default: false, desc: "Allow CURL to follow HTTP redirection"
@@ -54,14 +54,18 @@ class PingMySite < Thor
     end
 
     def notify(message)
-      notifier = Slack::Notifier.new ENV['SLACK_WEBHOOK_URL']
-      notifier.username = "Ping My Site"
-      notification = notifier.ping(message)
+      unless $TESTING
+        notifier = Slack::Notifier.new ENV['SLACK_WEBHOOK_URL']
+        notifier.username = "Ping My Site"
+        notification = notifier.ping(message)
       
-      if notification.response.code.to_i == 200
-        puts "Successfully notified to Slack"
+        if notification.response.code.to_i == 200
+          puts "Successfully notified to Slack"
+        else
+          puts "Something went wrong when trying to notify Slack"
+        end
       else
-        puts "Something went wrong when trying to notify Slack"
+        return "Successfully notified to Slack"
       end
     end
 
