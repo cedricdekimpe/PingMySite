@@ -2,6 +2,7 @@ require "dotenv-schema"
 require "thor"
 require "curb"
 require "slack-notifier"
+require "notifier"
 
 $TESTING = false
 
@@ -24,14 +25,14 @@ class PingMySite < Thor
         else
           message = "Unable to redirect #{url} to #{options[:expected_redirect_url]} with expected status code #{options[:expected_status_code]} - Received location #{redirect_url} with #{response_code} instead"   
           puts "Something went wrong, we must notify someone"
-          notify(message)
+          Notifier.new(message).perform
         end
 
       end
     else
       message = "Unable to ping #{url} with expected status code #{options[:expected_status_code]} - Received #{response_code} instead"
       puts "Something went wrong, we must notify someone"
-      notify(message)
+      Notifier.new(message).perform
     end
   end
 
@@ -52,24 +53,5 @@ class PingMySite < Thor
       @request.perform
       @request
     end
-
-    def notify(message)
-      unless $TESTING
-        notifier = Slack::Notifier.new ENV['SLACK_WEBHOOK_URL']
-        notifier.username = "Ping My Site"
-        notification = notifier.ping(message)
-      
-        if notification.response.code.to_i == 200
-          puts "Successfully notified to Slack"
-        else
-          puts "Something went wrong when trying to notify Slack"
-        end
-      else
-        return "Successfully notified to Slack"
-      end
-    end
-
   end
 end
-
-#PingMySite.start(ARGV)
