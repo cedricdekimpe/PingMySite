@@ -42,6 +42,10 @@ Copy the ```.env_schema```file to ```.env```and fill it.
 
 Something is missing in your ```.env```file. Compare it to ```.env_schema```and be sure every constant is defined.
 
+## Use with crontab
+
+> * * * * * /bin/bash -l -c 'cd /path/to/ping-my-site/ && bundle exec bin/ping-my-site ping http://www.6x7asbl.be --expected-status-code 200 --follow-location false'
+
 ## Technologies
 
 * [Dotenv Schema](https://github.com/mirakui/dotenv-schema)
