@@ -3,6 +3,7 @@ require "thor"
 require "curb"
 require "slack-notifier"
 require "notifier"
+require "pinger"
 
 $TESTING = false
 
@@ -13,45 +14,12 @@ class PingMySite < Thor
 
   desc "ping URL", "ping to URL"
   def ping(url)
-    response_code = get_response_code(url)
-    if response_code.to_i == options[:expected_status_code]
-      # Everything's fine
-      puts "Sucessfully ping #{url} with expected status code #{options[:expected_status_code]}"
-      if options[:expected_status_code] == 301 and options[:expected_redirect_url]
-        redirect_url = get_redirect_url(url)
-        if redirect_url == options[:expected_redirect_url]
-          # Everything's fine
-          puts "Sucessfully redirect #{url} to #{options[:expected_redirect_url]} with status #{response_code}"
-        else
-          message = "Unable to redirect #{url} to #{options[:expected_redirect_url]} with expected status code #{options[:expected_status_code]} - Received location #{redirect_url} with #{response_code} instead"   
-          puts "Something went wrong, we must notify someone"
-          Notifier.new(message).perform
-        end
-
-      end
-    else
-      message = "Unable to ping #{url} with expected status code #{options[:expected_status_code]} - Received #{response_code} instead"
-      puts "Something went wrong, we must notify someone"
-      Notifier.new(message).perform
-    end
+    pinger = Pinger.new
+    pinger.url = url
+    pinger.expected_status_code  = options[:expected_status_code]
+    pinger.expected_redirect_url = options[:expected_redirect_url]
+    pinger.follow_location       = options[:follow_location]
+    pinger.perform
   end
 
-  no_commands do
-
-    def get_response_code(url)
-      request(url).response_code
-    end
-
-    def get_redirect_url(url)
-      request(url).redirect_url
-    end
-
-    def request(url)
-      @request ||= Curl::Easy.new(url) do |curl|
-        curl.follow_location = options[:follow_location]
-      end
-      @request.perform
-      @request
-    end
-  end
 end
