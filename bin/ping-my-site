@@ -7,4 +7,4 @@ require 'ping-my-site'
 
 Dotenv.load 
 
-PingMySite.start(ARGV)
+PingMySite::Cli.start(ARGV)
