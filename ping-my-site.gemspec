@@ -14,5 +14,11 @@ Gem::Specification.new do |gem|
     gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
     gem.name          = "ping-my-site"
     gem.require_paths = ["lib"]
+    gem.add_runtime_dependency 'dotenv-schema', '~> 0.0.1'
+    gem.add_runtime_dependency 'thor', '~> 0.19.1'
+    gem.add_runtime_dependency 'curb', '~> 0.9.0'
+    gem.add_runtime_dependency 'slack-notifier', '~> 1.5', '>= 1.5.1'  
+
+    gem.add_development_dependency 'rspec'  
     gem.version       = PingMySite::VERSION
 end  
