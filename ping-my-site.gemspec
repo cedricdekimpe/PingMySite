@@ -6,8 +6,8 @@ Gem::Specification.new do |gem|
     gem.authors       = ["Cédric Bousmanne"]
     gem.email         = ["i@cedricbousmanne.com"]
     gem.description   = %q{}
-    gem.summary       = %q{}
-    gem.homepage      = "http://cedric.io"
+    gem.summary       = %q{A simple CLI Pingdom-like written in ruby. Check your site's HTTP status code and notify via Slack if anything went wrong.}
+    gem.homepage      = "https://github.com/cedricbousmanne/PingMySite"
 
     gem.files         = `git ls-files`.split($\)
     gem.executables   = ["ping-my-site"]
