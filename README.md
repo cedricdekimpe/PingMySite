@@ -1,6 +1,6 @@
 # Ping My Site
 
-A simple CLI Pingdom-like written in ruby.
+A simple CLI Pingdom-like written in ruby. Check your site's HTTP status code and notify via Slack if anything went wrong.
 
 ## How to use
 
@@ -52,6 +52,15 @@ Something is missing in your ```.env```file. Compare it to ```.env_schema```and 
 * [Thor](http://whatisthor.com/)
 * [Curb](https://github.com/taf2/curb)
 * [Slack-Notifier](https://github.com/stevenosloan/slack-notifier)
+
+## Roadmap
+
+* Add proxy support (host, port, username, password)
+* Add content-check support (both string and regex)
+* Add description to gemspec
+* Add GitHub URL to gemspec
+* Add LICENCE file
+* Add post_install_message to gemspec
 
 ## Foot Note
 
